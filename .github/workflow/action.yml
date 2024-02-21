@@ -1,0 +1,29 @@
+name: Write Date to File
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "0 0 */6 * *"
+
+jobs:
+  write_date:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      
+      - name: Write current date to file
+        run: |
+          echo $(date +%Y-%m-%d) > current_date.txt
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          git add current_date.txt
+          git commit -m "Update current date"
+          git push
