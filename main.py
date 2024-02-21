@@ -1,6 +1,13 @@
 import base64
 import streamlit as st
 
+with st.sidebar:
+    st.write("**Usage**")
+    st.write("Add the api key")
+    st.write("Example of tasks:")
+    st.write("- a")
+    st.write("- b")
+
 st.title("Scrapegraph-ai")
 left_co, cent_co,last_co = st.columns(3)
 with cent_co:
@@ -11,11 +18,7 @@ key = st.text_input("API key")
 
 link = st.text_input("Link to scrape")
 
-genre = st.radio(
-    "What operation you want do?",
-    ["a", "b", "c"],
-    index=1,
-)
+link = st.text_input("Write the prompt")
 
 if st.button("Run th program", type="primary"):
     st.write('DO something')
