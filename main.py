@@ -22,7 +22,7 @@ key = st.text_input("API key", type="password")
 model = st.radio(
     "Select the model",
     ["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4"],
-    index=None,
+    index=0,
 )
 
 link_to_scrape = st.text_input("Link to scrape")
