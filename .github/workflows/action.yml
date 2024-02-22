@@ -1,4 +1,4 @@
-name: Write Date to File
+name: Write Random Value to File
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
     - cron: "0 21 */1 * *"
 
 jobs:
-  write_date:
+  write_random_value:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -19,11 +19,11 @@ jobs:
         with:
           python-version: '3.x'
       
-      - name: Write current date to file
+      - name: Write random value to file
         run: |
-          echo $(date +%Y-%m-%d) > current_date.txt
+          echo $RANDOM > current_value.txt
           git config --local user.email "actions@github.com"
           git config --local user.name "GitHub Actions"
-          git add current_date.txt
-          git commit -m "Update current date"
+          git add current_value.txt
+          git commit -m "Update current value"
           git push

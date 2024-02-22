@@ -4,14 +4,14 @@ import streamlit as st
 with st.sidebar:
     st.write("**Usage**")
     st.write("Add the api key")
-    st.write("Example of tasks:")
-    st.write("- a")
-    st.write("- b")
+    st.write("Example of prompt:")
+    st.write("- Given a link scrape the website")
+    st.write("- Given a link scrape the number of stars on github")
 
 st.title("Scrapegraph-ai")
 left_co, cent_co,last_co = st.columns(3)
 with cent_co:
-    st.image("scrapegraphai_logo.png")
+    st.image("assets/scrapegraphai_logo.png")
 
 
 key = st.text_input("API key")
@@ -29,7 +29,7 @@ left_co2,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,cent_co2,last_co2 = st.columns([1,1,1,1,1
 
 with cent_co2:
     discord_link = "https://discord.gg/DujC7HG8"
-    discord_logo = base64.b64encode(open("discord.png", "rb").read()).decode()
+    discord_logo = base64.b64encode(open("assets/discord.png", "rb").read()).decode()
     st.markdown(
         f"""<a href="{discord_link}" target="_blank">
         <img src="data:image/png;base64,{discord_logo}" width="25">
@@ -39,7 +39,7 @@ with cent_co2:
 
 with last_co2:
     discord_link = "https://github.com/VinciGit00/Scrapegraph-ai"
-    discord_logo = base64.b64encode(open("github.png", "rb").read()).decode()
+    discord_logo = base64.b64encode(open("assets/github.png", "rb").read()).decode()
     st.markdown(
         f"""<a href="{discord_link}" target="_blank">
         <img src="data:image/png;base64,{discord_logo}" width="25">
