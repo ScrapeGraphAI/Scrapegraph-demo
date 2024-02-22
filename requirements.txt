@@ -1,1 +1,2 @@
+scrapegraphai==0.0.4
 streamlit==1.26.0

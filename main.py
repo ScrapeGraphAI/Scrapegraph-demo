@@ -1,31 +1,62 @@
 import base64
 import streamlit as st
+import json
+import pandas as pd
+from task import task
 
 with st.sidebar:
-    st.write("**Usage**")
-    st.write("Add the api key")
-    st.write("Example of prompt:")
-    st.write("- Given a link scrape the website")
-    st.write("- Given a link scrape the number of stars on github")
+    st.write("# Usage Examples")
+    st.write("## Prompt 1")
+    st.write("- Give me all the news with their abstracts")
+    st.write("## Prompt 2")
+    st.write("- Create a voice summary of the webpage")
+    st.write("## Prompt 3")
+    st.write("- List me all the images with their visual description")
 
 st.title("Scrapegraph-ai")
-left_co, cent_co,last_co = st.columns(3)
+left_co, cent_co, last_co = st.columns(3)
 with cent_co:
     st.image("assets/scrapegraphai_logo.png")
 
+key = st.text_input("API key", type="password")
+model = st.radio(
+    "Select the model",
+    ["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4"],
+    index=None,
+)
 
-key = st.text_input("API key")
+link_to_scrape = st.text_input("Link to scrape")
+prompt = st.text_input("Write the prompt")
 
-link = st.text_input("Link to scrape")
+if st.button("Run the program", type="primary"):
+    if not key or not model or not link_to_scrape or not prompt:
+        st.error("Please fill in all fields.")
+    else:
+        
+        st.write("Scraping phase started ...")
+        result = task(key, link_to_scrape, prompt, model)
+        st.write(result)
 
-link = st.text_input("Write the prompt")
+        if result:
+            json_str = json.dumps(result, indent=4)
+            df = pd.DataFrame(result)
 
-if st.button("Run th program", type="primary"):
-    st.write('DO something')
-else:
-    st.write('')
+            st.download_button(
+                label="Download JSON",
+                data=json_str,
+                file_name="scraped_data.json",
+                mime="application/json"
+            )
 
-left_co2,a,a,a,a,a,a,a,a,a,a,a,a,a,a,a,cent_co2,last_co2 = st.columns([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
+            csv = df.to_csv(index=False)
+            st.download_button(
+                label="Download CSV",
+                data=csv,
+                file_name="scraped_data.csv",
+                mime="text/csv"
+            )
+
+left_co2, *_, cent_co2, last_co2 = st.columns([1]*18)
 
 with cent_co2:
     discord_link = "https://discord.gg/DujC7HG8"
@@ -38,11 +69,11 @@ with cent_co2:
     )
 
 with last_co2:
-    discord_link = "https://github.com/VinciGit00/Scrapegraph-ai"
-    discord_logo = base64.b64encode(open("assets/github.png", "rb").read()).decode()
+    github_link = "https://github.com/VinciGit00/Scrapegraph-ai"
+    github_logo = base64.b64encode(open("assets/github.png", "rb").read()).decode()
     st.markdown(
-        f"""<a href="{discord_link}" target="_blank">
-        <img src="data:image/png;base64,{discord_logo}" width="25">
+        f"""<a href="{github_link}" target="_blank">
+        <img src="data:image/png;base64,{github_logo}" width="25">
         </a>""",
         unsafe_allow_html=True,
     )
