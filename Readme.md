@@ -14,6 +14,22 @@ Link of the developed library for the hackathon Github repo:
 
 [![My Skills](https://skillicons.dev/icons?i=github)](https://github.com/VinciGit00/Scrapegraph-ai)
 
+Official streamlit demo:
+
+[![My Skills](https://skillicons.dev/icons?i=react)](https://scrapegraph-ai-demo.streamlit.app/)ci
+
+## Example of output with TruLens
+
+## Local execution
+Is it possible to run in local this project using python with the command on your terminal with:
+<p align="center">
+  <img src="https://github.com/VinciGit00/Scrapegraph-LabLabAI-Hackathon/blob/main/docs/scrapegraphai_logo.png" alt="Scrapegraph-ai Logo" style="width: 50%;">
+</p>
+
+```bash
+streamlit run main.py
+```
+
 ## 🤝 Contributing
 
 Scrapegraph-ai is [MIT LICENSED](https://github.com/VinciGit00/Scrapegraph-ai/blob/main/LICENSE).
