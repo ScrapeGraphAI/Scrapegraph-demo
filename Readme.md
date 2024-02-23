@@ -23,7 +23,7 @@ Official streamlit demo:
 ## Local execution
 Is it possible to run in local this project using python with the command on your terminal with:
 <p align="center">
-  <img src="https://github.com/VinciGit00/Scrapegraph-LabLabAI-Hackathon/blob/main/docs/scrapegraphai_logo.png" alt="Scrapegraph-ai Logo" style="width: 50%;">
+  <img src="https://github.com/VinciGit00/Scrapegraph-LabLabAI-Hackathon/blob/main/assets/Trulens.png" alt="Scrapegraph-ai Logo" style="width: 50%;">
 </p>
 
 ```bash
