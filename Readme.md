@@ -20,7 +20,7 @@ Official streamlit demo:
 
 ## Example of output with TruLens
 <p align="center">
-  <img src="https://github.com/VinciGit00/Scrapegraph-LabLabAI-Hackathon/blob/main/assets/Trulens.png" alt="Scrapegraph-ai Logo" style="width: 50%;">
+  <img src="https://github.com/VinciGit00/Scrapegraph-LabLabAI-Hackathon/blob/main/assets/Trulens.png" alt="Scrapegraph-ai Logo" style="width: 100%;">
 </p>
 
 ## Local execution
