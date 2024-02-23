@@ -16,15 +16,16 @@ Link of the developed library for the hackathon Github repo:
 
 Official streamlit demo:
 
-[![My Skills](https://skillicons.dev/icons?i=react)](https://scrapegraph-ai-demo.streamlit.app/)ci
+[![My Skills](https://skillicons.dev/icons?i=react)](https://scrapegraph-ai-demo.streamlit.app/)
 
 ## Example of output with TruLens
-
-## Local execution
-Is it possible to run in local this project using python with the command on your terminal with:
 <p align="center">
   <img src="https://github.com/VinciGit00/Scrapegraph-LabLabAI-Hackathon/blob/main/assets/Trulens.png" alt="Scrapegraph-ai Logo" style="width: 50%;">
 </p>
+
+## Local execution
+Is it possible to run in local this project using python with the command on your terminal with:
+
 
 ```bash
 streamlit run main.py
