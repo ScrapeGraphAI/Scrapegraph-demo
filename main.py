@@ -34,12 +34,21 @@ if st.button("Run the program", type="primary"):
     else:
         
         st.write("Scraping phase started ...")
-        result = task(key, link_to_scrape, prompt, model)
-        st.write(result)
+        (true_lens_result, graph_result) = task(key, link_to_scrape, prompt, model)
 
-        if result:
-            json_str = json.dumps(result, indent=4)
-            df = pd.DataFrame(result)
+        left_res, rigth_res = st.columns([1, 1])
+
+        with left_res:
+            st.write("# Answer")
+            st.write(graph_result[0]) 
+        with rigth_res:
+            st.write("# TruLens evaluation")
+            print(true_lens_result["app_json"])
+            st.dataframe(true_lens_result)
+
+        if graph_result[0]:
+            json_str = json.dumps(graph_result[0], indent=4)
+            df =  pd.DataFrame(graph_result[0])
 
             st.download_button(
                 label="Download JSON",
