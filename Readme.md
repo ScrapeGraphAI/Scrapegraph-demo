@@ -10,7 +10,7 @@ Just say which information you want to extract and the library will do it for yo
 ## Official Demo for Scrapegraph-ai Library 
 This repo is a streamlit demo/trial for the offcial Github Library Scrapegrap-ai.
 
-Link of the Github repo:
+Link of the developed library for the hackathon Github repo:
 
 [![My Skills](https://skillicons.dev/icons?i=github)](https://github.com/VinciGit00/Scrapegraph-ai)
 
