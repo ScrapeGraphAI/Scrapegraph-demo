@@ -3,6 +3,7 @@ import streamlit as st
 import json
 import pandas as pd
 from task import task
+from text_to_speech import text_to_speech
 
 with st.sidebar:
     st.write("# Usage Examples")
@@ -12,6 +13,8 @@ with st.sidebar:
     st.write("- Create a voice summary of the webpage")
     st.write("## Prompt 3")
     st.write("- List me all the images with their visual description")
+    st.write("## Prompt 4")
+    st.write("- Read me the summary of the news")
 
 st.title("Scrapegraph-ai")
 left_co, cent_co, last_co = st.columns(3)
@@ -21,7 +24,7 @@ with cent_co:
 key = st.text_input("API key", type="password")
 model = st.radio(
     "Select the model",
-    ["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4"],
+    ["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4", "text-to-speech"],
     index=0,
 )
 
@@ -32,38 +35,43 @@ if st.button("Run the program", type="primary"):
     if not key or not model or not link_to_scrape or not prompt:
         st.error("Please fill in all fields.")
     else:
-        
         st.write("Scraping phase started ...")
-        (true_lens_result, graph_result) = task(key, link_to_scrape, prompt, model)
 
-        left_res, rigth_res = st.columns([1, 1])
+        if model ==  "text-to-speech":
+            res = text_to_speech(key, prompt, link_to_scrape)
+            st.write(res["answer"])
+            st.audio(res["audio"])
+        else:
+            (true_lens_result, graph_result) = task(key, link_to_scrape, prompt, model)
 
-        with left_res:
-            st.write("# Answer")
-            st.write(graph_result[0]) 
-        with rigth_res:
-            st.write("# TruLens evaluation")
-            print(true_lens_result["app_json"])
-            st.dataframe(true_lens_result)
+            left_res, rigth_res = st.columns([1, 1])
 
-        if graph_result[0]:
-            json_str = json.dumps(graph_result[0], indent=4)
-            df =  pd.DataFrame(graph_result[0])
+            with left_res:
+                st.write("# Answer")
+                st.write(graph_result[0]) 
+            with rigth_res:
+                st.write("# TruLens evaluation")
+                print(true_lens_result["app_json"])
+                st.dataframe(true_lens_result)
 
-            st.download_button(
-                label="Download JSON",
-                data=json_str,
-                file_name="scraped_data.json",
-                mime="application/json"
-            )
+            if graph_result[0]:
+                json_str = json.dumps(graph_result[0], indent=4)
+                df =  pd.DataFrame(graph_result[0])
 
-            csv = df.to_csv(index=False)
-            st.download_button(
-                label="Download CSV",
-                data=csv,
-                file_name="scraped_data.csv",
-                mime="text/csv"
-            )
+                st.download_button(
+                    label="Download JSON",
+                    data=json_str,
+                    file_name="scraped_data.json",
+                    mime="application/json"
+                )
+
+                csv = df.to_csv(index=False)
+                st.download_button(
+                    label="Download CSV",
+                    data=csv,
+                    file_name="scraped_data.csv",
+                    mime="text/csv"
+                )
 
 left_co2, *_, cent_co2, last_co2 = st.columns([1]*18)
 
