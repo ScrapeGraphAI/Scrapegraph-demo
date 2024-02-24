@@ -5,6 +5,9 @@ import pandas as pd
 from task import task
 from text_to_speech import text_to_speech
 
+st.set_page_config(page_title="Scrapegraph-ai demo",
+    page_icon="🕷️")
+
 with st.sidebar:
     st.write("# Usage Examples")
     st.write("## Prompt 1")
