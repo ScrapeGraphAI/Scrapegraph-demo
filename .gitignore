@@ -1,2 +1,28 @@
+.DS_Store
+.DS_Store?
+._*
 
-__pycache__/task.cpython-311.pyc
+# Byte-compiled / optimized / DLL files
+**/__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+MANIFEST
+
+docs/build/
+docs/source/_templates/
+docs/source/_static/
+.env
+venv/
+.vscode/
+
+# exclude pdf, mp3
+*.pdf
+*.mp3
+*.sqlite
