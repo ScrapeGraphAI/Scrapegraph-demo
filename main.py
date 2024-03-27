@@ -47,15 +47,8 @@ if st.button("Run the program", type="primary"):
         else:
             (true_lens_result, graph_result) = task(key, link_to_scrape, prompt, model)
 
-            left_res, rigth_res = st.columns([1, 1])
-
-            with left_res:
-                st.write("# Answer")
-                st.write(graph_result[0]) 
-            with rigth_res:
-                st.write("# TruLens evaluation")
-                print(true_lens_result["app_json"])
-                st.dataframe(true_lens_result)
+            st.write("# Answer")
+            st.write(graph_result[0]) 
 
             if graph_result[0]:
                 json_str = json.dumps(graph_result[0], indent=4)
