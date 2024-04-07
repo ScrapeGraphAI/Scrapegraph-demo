@@ -9,6 +9,8 @@ st.set_page_config(page_title="Scrapegraph-ai demo",
     page_icon="🕷️")
 
 with st.sidebar:
+    st.write("Official demo for [Scrapegraph-ai](https://github.com/VinciGit00/Scrapegraph-ai) library")
+    st.markdown("""---""")
     st.write("# Usage Examples")
     st.write("## Prompt 1")
     st.write("- Give me all the news with their abstracts")
@@ -18,6 +20,8 @@ with st.sidebar:
     st.write("- List me all the images with their visual description")
     st.write("## Prompt 4")
     st.write("- Read me the summary of the news")
+    st.markdown("""---""")
+    st.write("You want to suggest tips or improvements? Contact me through email to mvincig11@gmail.com")
 
 st.title("Scrapegraph-ai")
 left_co, cent_co, last_co = st.columns(3)
