@@ -30,7 +30,7 @@ with st.sidebar:
 
     # Text field for email input
     st.write("Write your email to subscribe to the newsletter")
-    email_input = st.text_input()
+    email_input = st.text_input("")
 
     # Button to save email
     if st.button("Save Email"):
