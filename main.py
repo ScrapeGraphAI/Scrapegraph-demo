@@ -8,6 +8,10 @@ from text_to_speech import text_to_speech
 st.set_page_config(page_title="Scrapegraph-ai demo",
     page_icon="🕷️")
 
+def save_email(email):
+    with open("mails.txt", "a") as file:
+        file.write(email + "\n")
+
 with st.sidebar:
     st.write("Official demo for [Scrapegraph-ai](https://github.com/VinciGit00/Scrapegraph-ai) library")
     st.markdown("""---""")
@@ -23,12 +27,25 @@ with st.sidebar:
     st.markdown("""---""")
     st.write("You want to suggest tips or improvements? Contact me through email to mvincig11@gmail.com")
 
+
+    # Text field for email input
+    st.write("Write your email to subscribe to the newsletter")
+    email_input = st.text_input("Enter your email:")
+
+    # Button to save email
+    if st.button("Save Email"):
+        if email_input:
+            save_email(email_input)
+            st.success("Email saved successfully!")
+        else:
+            st.warning("Please enter an email before saving.")
+
 st.title("Scrapegraph-ai")
 left_co, cent_co, last_co = st.columns(3)
 with cent_co:
     st.image("assets/scrapegraphai_logo.png")
 
-key = st.text_input("API key", type="password")
+key = st.text_input("Openai API key", type="password")
 model = st.radio(
     "Select the model",
     ["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4", "text-to-speech"],
@@ -49,14 +66,15 @@ if st.button("Run the program", type="primary"):
             st.write(res["answer"])
             st.audio(res["audio"])
         else:
-            (true_lens_result, graph_result) = task(key, link_to_scrape, prompt, model)
+            graph_result = task(key, link_to_scrape, prompt, model)
 
+            print(graph_result)
             st.write("# Answer")
-            st.write(graph_result[0]) 
+            st.write(graph_result) 
 
-            if graph_result[0]:
-                json_str = json.dumps(graph_result[0], indent=4)
-                df =  pd.DataFrame(graph_result[0])
+            if graph_result:
+                json_str = json.dumps(graph_result, indent=4)
+                df =  pd.DataFrame(graph_result)
 
                 st.download_button(
                     label="Download JSON",

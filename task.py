@@ -1,4 +1,4 @@
-from scrapegraphai.evaluators import TrulensEvaluator
+from scrapegraphai.graphs import SmartScraperGraph
 
 def task(key:str, url:str, prompt:str, model:str):
     """ 
@@ -13,15 +13,23 @@ def task(key:str, url:str, prompt:str, model:str):
         - results_df (pd.Dataframe()): result as padnas df
     """ 
 
-    llm_config = {
+    graph_config = {
+        "llm": {
             "api_key": key,
-            "model_name": model,
+            "model": model,
+        },
     }
 
-    trulens_evaluator = TrulensEvaluator(key)
+    # ************************************************
+    # Create the SmartScraperGraph instance and run it
+    # ************************************************
 
-    list_of_inputs = [
-        (prompt, url, llm_config),
-    ]
+    smart_scraper_graph = SmartScraperGraph(
+        prompt=prompt,
+        # also accepts a string with the already downloaded HTML code
+        source=url,
+        config=graph_config
+    )
 
-    return trulens_evaluator.evaluate(list_of_inputs, dashboard=False)
+    result = smart_scraper_graph.run()
+    return result
