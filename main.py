@@ -28,18 +28,6 @@ with st.sidebar:
     st.write("You want to suggest tips or improvements? Contact me through email to mvincig11@gmail.com")
 
 
-    # Text field for email input
-    st.write("Write your email to subscribe to the newsletter")
-    email_input = st.text_input("")
-
-    # Button to save email
-    if st.button("Save Email"):
-        if email_input:
-            save_email(email_input)
-            st.success("Email saved successfully!")
-        else:
-            st.warning("Please enter an email before saving.")
-
 st.title("Scrapegraph-ai")
 left_co, cent_co, last_co = st.columns(3)
 with cent_co:
@@ -91,7 +79,7 @@ if st.button("Run the program", type="primary"):
                     mime="text/csv"
                 )
 
-left_co2, *_, cent_co2, last_co2 = st.columns([1]*18)
+left_co2, *_, cent_co2, last_co2, last_c3= st.columns([1]*18)
 
 with cent_co2:
     discord_link = "https://discord.gg/DujC7HG8"
@@ -109,6 +97,16 @@ with last_co2:
     st.markdown(
         f"""<a href="{github_link}" target="_blank">
         <img src="data:image/png;base64,{github_logo}" width="25">
+        </a>""",
+        unsafe_allow_html=True,
+    )
+
+with last_c3:
+    twitter_link = "https://twitter.com/scrapegraphai"
+    twitte_logo = base64.b64encode(open("assets/twitter.png", "rb").read()).decode()
+    st.markdown(
+        f"""<a href="{twitter_link}" target="_blank">
+        <img src="data:image/png;base64,{twitte_logo}" width="25">
         </a>""",
         unsafe_allow_html=True,
     )
