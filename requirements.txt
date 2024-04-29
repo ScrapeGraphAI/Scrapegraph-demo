@@ -1,2 +1,3 @@
 pandas==2.0.3
 scrapegraphai==0.2.3
+streamlit>=1.0

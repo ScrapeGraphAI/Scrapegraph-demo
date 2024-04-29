@@ -1,0 +1,25 @@
+version: "3.9"
+
+networks:
+  t2_proxy:
+    external: true
+
+services:
+  scrapegraphailab:
+    image: scrapegraphailab
+    container_name: scrapegraphailab-container
+    networks:
+      - t2_proxy
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      ## HTTP Routers
+      - "traefik.http.routers.scrapegraphailab-rtr.entrypoints=https"
+      - "traefik.http.routers.scrapegraphailab-rtr.rule=Host(`scrapegraphailab.example.com`)" 
+      ## Middlewares
+      - "traefik.http.routers.scrapegraphailab-rtr.middlewares=chain-no-auth@file" # For no Authentication
+      # - "traefik.http.routers.scrapegraphailab-rtr.middlewares=chain-basic-auth@file" # For Basic HTTP Authentication
+      # - "traefik.http.routers.scrapegraphailab-rtr.middlewares=chain-authentik@file" # For AUTHENTIK Authentication
+      ## HTTP Services
+      - "traefik.http.routers.scrapegraphailab-rtr.service=scrapegraphailab-svc"
+      - "traefik.http.services.scrapegraphailab-svc.loadbalancer.server.port=8501"
