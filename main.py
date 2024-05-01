@@ -82,7 +82,7 @@ if st.button("Run the program", type="primary"):
 left_co2, *_, cent_co2, last_co2, last_c3= st.columns([1]*18)
 
 with cent_co2:
-    discord_link = "https://discord.gg/DujC7HG8"
+    discord_link = "https://discord.com/invite/gkxQDAjfeX"
     discord_logo = base64.b64encode(open("assets/discord.png", "rb").read()).decode()
     st.markdown(
         f"""<a href="{discord_link}" target="_blank">
