@@ -7,6 +7,7 @@ Bedrock Scrapper with ScrapeGraphAI
 """
 
 import os
+import boto3
 
 import streamlit as st
 
@@ -14,6 +15,19 @@ from scrapegraphai.graphs import SmartScraperGraph
 from scrapegraphai.helpers import models_tokens
 
 from langchain_core.exceptions import OutputParserException
+
+SUPPORTED_AWS_REGIONS = [
+    "us-east-1",
+    "us-east-2",
+    "us-west-2",
+    "ap-south-1",
+    "ap-southeast-1",
+    "ap-southeast-2",
+    "ap-northeast-1",
+    "eu-central-1",
+    "eu-west-1",
+    "eu-west-3"
+]
 
 st.set_page_config(page_title="Bedrock Scraper", page_icon="🕷️")
 st.title("Bedrock Scraper 🕷️")
@@ -51,11 +65,22 @@ embedder = st.selectbox(
 with st.expander("Set up AWS credentials 🔑", expanded=False):
     st.markdown("❗ Use [temporary security credentials](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html) whenever possible")
     with st.form("AWS Credentials", clear_on_submit=True):
-        os.environ['AWS_ACCESS_KEY_ID'] = st.text_input("AWS Access Key ID", type="password")
-        os.environ['AWS_SECRET_ACCESS_KEY'] = st.text_input("AWS Secret Access Key", type="password")
-        os.environ['AWS_SESSION_TOKEN'] = st.text_input("AWS Session Token", type="password")
+        aws_access_key_id = st.text_input("AWS Access Key ID", type="password")
+        aws_secret_access_key = st.text_input("AWS Secret Access Key", type="password")
+        aws_session_token = st.text_input("AWS Session Token", type="password")
+        region_name = st.selectbox(
+            "Region",
+            options=SUPPORTED_AWS_REGIONS
+        )
         submitted = st.form_submit_button("Submit")
         if submitted:
+            session = boto3.Session(
+                aws_access_key_id=aws_access_key_id,
+                aws_secret_access_key=aws_secret_access_key,
+                aws_session_token=aws_session_token,
+                region_name=region_name
+            )
+            st.session_state.client = session.client("bedrock-runtime")
             st.info("AWS credentials updated!")
 
 source = st.text_input(
@@ -67,13 +92,18 @@ prompt = st.text_area(
 )
 
 # 1. Define graph configuration
+if 'client' not in st.session_state:
+    st.session_state.client = None
+
 config = {
     "llm": {
+        "client": st.session_state.client,
         "model": f"bedrock/{llm}",
         "temperature": temperature,
         "format": "json"
     },
     "embeddings": {
+        "client": st.session_state.client,
         "model": f"bedrock/{embedder}"
     },
 }
