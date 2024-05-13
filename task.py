@@ -1,6 +1,5 @@
 from scrapegraphai.graphs import SmartScraperGraph
 
-
 def task(key:str, url:str, prompt:str, model:str):
     """ 
     Task that execute the scraping:
