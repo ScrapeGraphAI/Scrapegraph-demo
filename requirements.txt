@@ -1,4 +1,4 @@
 langchain_core==0.1.52
-pandas==2.0.3
+pandas===2.2.2
 scrapegraphai==0.10.1
 streamlit==1.26.0
