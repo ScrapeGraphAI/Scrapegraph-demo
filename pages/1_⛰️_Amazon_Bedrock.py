@@ -6,6 +6,7 @@ Bedrock Scrapper with ScrapeGraphAI
 /  < `' >  \
 """
 
+import os
 import boto3
 
 import streamlit as st
@@ -27,6 +28,9 @@ SUPPORTED_AWS_REGIONS = [
     "eu-west-1",
     "eu-west-3"
 ]
+
+if 'AWS_DEFAULT_REGION' not in os.environ:
+    os.environ['AWS_DEFAULT_REGION'] = SUPPORTED_AWS_REGIONS[0]
 
 st.set_page_config(page_title="Bedrock Scraper", page_icon="🕷️")
 st.title("Bedrock Scraper 🕷️")
