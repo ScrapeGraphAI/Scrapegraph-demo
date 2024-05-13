@@ -1,3 +1,4 @@
+import os
 import base64
 import streamlit as st
 import json
@@ -7,6 +8,10 @@ from text_to_speech import text_to_speech
 
 st.set_page_config(page_title="Scrapegraph-ai demo",
     page_icon="🕷️")
+
+# Install playwright browsers
+# https://discuss.streamlit.io/t/using-playwright-with-streamlit/28380/11
+os.system("playwright install")
 
 def save_email(email):
     with open("mails.txt", "a") as file:

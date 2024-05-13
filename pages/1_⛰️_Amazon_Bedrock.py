@@ -6,7 +6,6 @@ Bedrock Scrapper with ScrapeGraphAI
 /  < `' >  \
 """
 
-import os
 import boto3
 
 import streamlit as st
