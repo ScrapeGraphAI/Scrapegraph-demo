@@ -16,7 +16,10 @@ from scrapegraphai.helpers import models_tokens
 
 from langchain_core.exceptions import OutputParserException
 
-from helper import playwright_install
+from helper import (
+	playwright_install,
+	add_download_options
+)
 
 SUPPORTED_AWS_REGIONS = [
     "us-east-1",
@@ -138,4 +141,6 @@ run = st.button(
 )
 
 if st.session_state.get('output', None):
-    st.json(st.session_state.output)
+    st.write("### Output")
+    st.write(st.session_state.output)
+    add_download_options(st.session_state.output)
