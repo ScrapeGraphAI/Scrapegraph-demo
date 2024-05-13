@@ -44,7 +44,6 @@ libxcursor1
 libxi6
 libxrender1
 libxtst6
-libsoup-3.0-0
 libenchant-2-2
 gstreamer1.0-libav
 gstreamer1.0-plugins-bad
@@ -64,7 +63,6 @@ libgudev-1.0-0
 libharfbuzz-icu0
 libharfbuzz0b
 libhyphen0
-libjpeg-turbo8
 liblcms2-2
 libmanette-0.2-0
 libnotify4
@@ -80,6 +78,5 @@ libwebpdemux2
 libwoff1
 libxml2
 libxslt1.1
-libx264-163
 libatomic1
 libevent-2.1-7
