@@ -3,15 +3,15 @@ import base64
 import streamlit as st
 import json
 import pandas as pd
+from helper import playwright_install
 from task import task
 from text_to_speech import text_to_speech
 
 st.set_page_config(page_title="Scrapegraph-ai demo",
     page_icon="🕷️")
 
-# Install playwright browsers and dependencies
-# https://discuss.streamlit.io/t/using-playwright-with-streamlit/28380/11
-os.system("playwright install")
+# Install playwright browsers
+playwright_install()
 
 def save_email(email):
     with open("mails.txt", "a") as file:

@@ -16,6 +16,8 @@ from scrapegraphai.helpers import models_tokens
 
 from langchain_core.exceptions import OutputParserException
 
+from helper import playwright_install
+
 SUPPORTED_AWS_REGIONS = [
     "us-east-1",
     "us-east-2",
@@ -34,6 +36,9 @@ if 'AWS_DEFAULT_REGION' not in os.environ:
 
 st.set_page_config(page_title="Bedrock Scraper", page_icon="🕷️")
 st.title("Bedrock Scraper 🕷️")
+
+# -1. Install playwright browsers
+playwright_install()
 
 # 0a. Check supported models
 supported_models = list(models_tokens['bedrock'].keys())
