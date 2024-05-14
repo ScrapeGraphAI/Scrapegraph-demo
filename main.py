@@ -1,12 +1,20 @@
+import os
 import base64
 import streamlit as st
 import json
 import pandas as pd
+from helper import (
+	playwright_install,
+	add_download_options
+)
 from task import task
 from text_to_speech import text_to_speech
 
 st.set_page_config(page_title="Scrapegraph-ai demo",
     page_icon="🕷️")
+
+# Install playwright browsers
+playwright_install()
 
 def save_email(email):
     with open("mails.txt", "a") as file:
@@ -61,23 +69,7 @@ if st.button("Run the program", type="primary"):
             st.write(graph_result) 
 
             if graph_result:
-                json_str = json.dumps(graph_result, indent=4)
-                df =  pd.DataFrame(graph_result)
-
-                st.download_button(
-                    label="Download JSON",
-                    data=json_str,
-                    file_name="scraped_data.json",
-                    mime="application/json"
-                )
-
-                csv = df.to_csv(index=False)
-                st.download_button(
-                    label="Download CSV",
-                    data=csv,
-                    file_name="scraped_data.csv",
-                    mime="text/csv"
-                )
+                add_download_options(graph_result)
 
 left_co2, *_, cent_co2, last_co2, last_c3= st.columns([1]*18)
 
