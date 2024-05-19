@@ -1,6 +1,6 @@
 from scrapegraphai.graphs import SmartScraperGraph
 
-def task(key:str, url:str, prompt:str, model:str):
+def task(key:str, url:str, prompt:str, model:str, base_url=None):
     """ 
     Task that execute the scraping:
         Arguments:
@@ -12,13 +12,21 @@ def task(key:str, url:str, prompt:str, model:str):
         - results_df["output"] (dict): result as a dictionary
         - results_df (pd.Dataframe()): result as padnas df
     """ 
-
-    graph_config = {
+    if base_url is not None:
+        graph_config = {
+            "llm": {
+                "api_key": key,
+                "model": model,
+            },
+        }
+    else: 
+        graph_config = {
         "llm": {
             "api_key": key,
             "model": model,
+            "openai_api_base": base_url,
         },
-    }
+}
 
     # ************************************************
     # Create the SmartScraperGraph instance and run it

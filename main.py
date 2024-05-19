@@ -4,14 +4,13 @@ import streamlit as st
 import json
 import pandas as pd
 from helper import (
-	playwright_install,
-	add_download_options
+    playwright_install,
+    add_download_options
 )
 from task import task
 from text_to_speech import text_to_speech
 
-st.set_page_config(page_title="Scrapegraph-ai demo",
-    page_icon="🕷️")
+st.set_page_config(page_title="Scrapegraph-ai demo", page_icon="🕷️")
 
 # Install playwright browsers
 playwright_install()
@@ -35,7 +34,6 @@ with st.sidebar:
     st.markdown("""---""")
     st.write("You want to suggest tips or improvements? Contact me through email to mvincig11@gmail.com")
 
-
 st.title("Scrapegraph-ai")
 left_co, cent_co, last_co = st.columns(3)
 with cent_co:
@@ -48,30 +46,35 @@ model = st.radio(
     index=0,
 )
 
+url = st.text_input("base url (optional)")
 link_to_scrape = st.text_input("Link to scrape")
 prompt = st.text_input("Write the prompt")
 
 if st.button("Run the program", type="primary"):
     if not key or not model or not link_to_scrape or not prompt:
-        st.error("Please fill in all fields.")
+        st.error("Please fill in all fields except the base URL, which is optional.")
     else:
         st.write("Scraping phase started ...")
 
-        if model ==  "text-to-speech":
+        if model == "text-to-speech":
             res = text_to_speech(key, prompt, link_to_scrape)
             st.write(res["answer"])
             st.audio(res["audio"])
         else:
-            graph_result = task(key, link_to_scrape, prompt, model)
+            # Pass url only if it's provided
+            if url:
+                graph_result = task(key, link_to_scrape, prompt, model, base_url=url)
+            else:
+                graph_result = task(key, link_to_scrape, prompt, model)
 
             print(graph_result)
             st.write("# Answer")
-            st.write(graph_result) 
+            st.write(graph_result)
 
             if graph_result:
                 add_download_options(graph_result)
 
-left_co2, *_, cent_co2, last_co2, last_c3= st.columns([1]*18)
+left_co2, *_, cent_co2, last_co2, last_c3 = st.columns([1] * 18)
 
 with cent_co2:
     discord_link = "https://discord.com/invite/gkxQDAjfeX"
@@ -95,10 +98,10 @@ with last_co2:
 
 with last_c3:
     twitter_link = "https://twitter.com/scrapegraphai"
-    twitte_logo = base64.b64encode(open("assets/twitter.png", "rb").read()).decode()
+    twitter_logo = base64.b64encode(open("assets/twitter.png", "rb").read()).decode()
     st.markdown(
         f"""<a href="{twitter_link}" target="_blank">
-        <img src="data:image/png;base64,{twitte_logo}" width="25">
+        <img src="data:image/png;base64,{twitter_logo}" width="25">
         </a>""",
         unsafe_allow_html=True,
     )
