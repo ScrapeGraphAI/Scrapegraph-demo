@@ -33,6 +33,9 @@ with st.sidebar:
     st.write("- Read me the summary of the news")
     st.markdown("""---""")
     st.write("You want to suggest tips or improvements? Contact me through email to mvincig11@gmail.com")
+    st.markdown("""---""")
+    st.write("Follow our [Github page](https://github.com/ScrapeGraphAI)")
+
 
 st.title("Scrapegraph-ai")
 left_co, cent_co, last_co = st.columns(3)
