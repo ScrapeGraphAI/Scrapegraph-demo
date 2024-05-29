@@ -8,7 +8,7 @@ Just say which information you want to extract and the library will do it for yo
 </p>
 
 ## Official Demo for Scrapegraph-ai Library 
-This repo is a streamlit demo/trial for the offcial Github Library Scrapegrap-ai.
+This repo is a streamlit demo/trial for the offcial Github Library Scrapegraph-ai.
 
 Link of the developed library for the hackathon Github repo:
 
@@ -16,7 +16,7 @@ Link of the developed library for the hackathon Github repo:
 
 Official streamlit demo:
 
-[![My Skills](https://skillicons.dev/icons?i=react)](https://scrapegraph-ai-demo.streamlit.app/)
+[![My Skills](https://skillicons.dev/icons?i=react)](https://scrapegraph-ai-web-dashboard.streamlit.app)
 
 ## Example of output with TruLens
 <p align="center">
