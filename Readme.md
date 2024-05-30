@@ -20,7 +20,7 @@ Official streamlit demo:
 
 ## Example of output with TruLens
 <p align="center">
-  <img src="https://github.com/VinciGit00/Scrapegraph-LabLabAI-Hackathon/blob/main/assets/Trulens.png" alt="Scrapegraph-ai Logo" style="width: 100%;">
+  <img src="https://github.com/VinciGit00/Scrapegraph-LabLabAI-Hackathon/blob/main/assets/Trulens.png" alt="Scrapegraph-ai Logo" style="width: 60%;">
 </p>
 
 ## Local execution
@@ -62,10 +62,6 @@ You can also follow all the updates on linkedin!
 | Marco Vinciguerra  | [![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/marco-vinciguerra-7ba365242/)    |
 | Marco Perini       | [![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/perinim/)   |
 | Lorenzo Padoan     | [![Linkedin Badge](https://img.shields.io/badge/-Linkedin-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/lorenzo-padoan-4521a2154/)  |
-
-## 📜 License
-
-ScrapeGraphAI is licensed under the Apache 2.0 License. See the [LICENSE](https://github.com/VinciGit00/Scrapegraph-ai/blob/main/LICENSE) file for more information.
 
 ## Acknowledgements
 
