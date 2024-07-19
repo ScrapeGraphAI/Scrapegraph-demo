@@ -45,7 +45,7 @@ with cent_co:
 key = st.text_input("Openai API key", type="password")
 model = st.radio(
     "Select the model",
-    ["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4", "text-to-speech", "gpt-4o"],
+    ["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4", "text-to-speech", "gpt-4o", "gpt-4o-mini"],
     index=0,
 )
 
