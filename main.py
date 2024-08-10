@@ -1,14 +1,13 @@
 import os
 import base64
 import streamlit as st
+import requests
 import json
 import pandas as pd
 from helper import (
     playwright_install,
     add_download_options
 )
-from task import task
-from text_to_speech import text_to_speech
 
 st.set_page_config(page_title="Scrapegraph-ai demo", page_icon="🕷️")
 
@@ -41,41 +40,44 @@ st.title("Scrapegraph-ai")
 left_co, cent_co, last_co = st.columns(3)
 with cent_co:
     st.image("assets/scrapegraphai_logo.png")
+st.title('Scrapegraph-api')
+st.write("refill at this page")
 
-key = st.text_input("Openai API key", type="password")
-model = st.radio(
-    "Select the model",
-    ["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4", "text-to-speech", "gpt-4o", "gpt-4o-mini"],
-    index=0,
-)
+# Get the API key, URL, prompt, and optional schema from the user
+api_key = st.text_input('Enter your API key:')
+url = st.text_input('Enter the URL to scrape:')
+prompt = st.text_input('Enter your prompt:')
+schema = st.text_input('Enter your optional schema (leave blank if not needed):')
 
-url = st.text_input("base url (optional)")
-link_to_scrape = st.text_input("Link to scrape")
-prompt = st.text_input("Write the prompt")
+# When the user clicks the 'Scrape' button
+if st.button('Scrape'):
+    # Set up the headers and payload for the API request
+    headers = {'Content-Type': 'application/json'}
+    payload = {
+        'api_key': api_key,
+        'url': url,
+        'prompt': prompt,
+        'schema': schema
+    }
 
-if st.button("Run the program", type="primary"):
-    if not key or not model or not link_to_scrape or not prompt:
-        st.error("Please fill in all fields except the base URL, which is optional.")
+    # Make the API request
+    response = requests.post('https://api.scrapegraphai.com/smart_scraper', headers=headers, data=json.dumps(payload))
+
+    # If the request was successful
+    if response.status_code == 200:
+        # Parse the JSON response
+        data = response.json()
+
+        # Display the extracted data
+        st.write(data['result'])
+
+        # Display the remaining credits
+        st.write(f"Remaining credits: {data['credits_left']}")
+
+    # If the request was unsuccessful
     else:
-        st.write("Scraping phase started ...")
+        st.write(f"Error: {response.status_code}")
 
-        if model == "text-to-speech":
-            res = text_to_speech(key, prompt, link_to_scrape)
-            st.write(res["answer"])
-            st.audio(res["audio"])
-        else:
-            # Pass url only if it's provided
-            if url:
-                graph_result = task(key, link_to_scrape, prompt, model, base_url=url)
-            else:
-                graph_result = task(key, link_to_scrape, prompt, model)
-
-            print(graph_result)
-            st.write("# Answer")
-            st.write(graph_result)
-
-            if graph_result:
-                add_download_options(graph_result)
 
 left_co2, *_, cent_co2, last_co2, last_c3 = st.columns([1] * 18)
 
