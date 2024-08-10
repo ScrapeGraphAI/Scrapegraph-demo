@@ -34,6 +34,9 @@ SUPPORTED_AWS_REGIONS = [
     "eu-west-3"
 ]
 
+DEFAULT_TEXT_MODEL = "anthropic.claude-3-haiku-20240307-v1:0"
+DEFAULT_EMBEDDINGS_MODEL = "amazon.titan-embed-text-v1"
+
 if 'AWS_DEFAULT_REGION' not in os.environ:
     os.environ['AWS_DEFAULT_REGION'] = SUPPORTED_AWS_REGIONS[0]
 
@@ -52,7 +55,8 @@ text_models = list(set(supported_models) - set(embed_models))
 
 llm = st.selectbox(
     label="Select model",
-    options=text_models
+    options=text_models,
+    index=text_models.index(DEFAULT_TEXT_MODEL)
 )
 
 temperature = st.sidebar.slider(
@@ -70,7 +74,8 @@ model_tokens = st.sidebar.slider(
 
 embedder = st.selectbox(
     label="Select embedder",
-    options=embed_models
+    options=embed_models,
+    index=embed_models.index(DEFAULT_EMBEDDINGS_MODEL)
 )
 
 with st.expander("Set up AWS credentials 🔑", expanded=False):
@@ -95,11 +100,13 @@ with st.expander("Set up AWS credentials 🔑", expanded=False):
             st.info("AWS credentials updated!")
 
 source = st.text_input(
-    label="Link to scrape"
+    label="Link to scrape",
+    value="https://perinim.github.io/projects/"
 )
 
 prompt = st.text_area(
-    label="Write the prompt"
+    label="Write the prompt",
+    value="List me all the projects with their description."
 )
 
 # 1. Define graph configuration
@@ -110,8 +117,9 @@ config = {
     "llm": {
         "client": st.session_state.client,
         "model": f"bedrock/{llm}",
-        "temperature": temperature,
-        "format": "json"
+        "model_kwargs": {
+            "temperature": temperature,
+		},
     },
     "embeddings": {
         "client": st.session_state.client,
