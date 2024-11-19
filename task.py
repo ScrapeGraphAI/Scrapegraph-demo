@@ -23,18 +23,15 @@ def task(key:str, url:str, prompt:str, model:str, base_url=None):
         graph_config = {
         "llm": {
             "api_key": key,
-            "model": model,
-            "openai_api_base": base_url,
+            "model": "openai/gpt-4",
         },
 }
 
-    # ************************************************
-    # Create the SmartScraperGraph instance and run it
-    # ************************************************
-
+    print(prompt)
+    print(url)
+    print(graph_config)
     smart_scraper_graph = SmartScraperGraph(
         prompt=prompt,
-        # also accepts a string with the already downloaded HTML code
         source=url,
         config=graph_config
     )
