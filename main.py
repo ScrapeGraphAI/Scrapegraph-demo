@@ -8,6 +8,7 @@ from helper import (
     playwright_install,
     add_download_options
 )
+from scrapegraph_py import ScrapeGraphClient, smart_scraper
 
 st.set_page_config(page_title="Scrapegraph-ai demo", page_icon="🕷️")
 
@@ -40,43 +41,22 @@ st.title("Scrapegraph-ai")
 left_co, cent_co, last_co = st.columns(3)
 with cent_co:
     st.image("assets/scrapegraphai_logo.png")
-st.title('Scrapegraph-api')
-st.write("refill at this page")
 
-# Get the API key, URL, prompt, and optional schema from the user
+# Use only text input for API key
 api_key = st.text_input('Enter your API key:')
 url = st.text_input('Enter the URL to scrape:')
 prompt = st.text_input('Enter your prompt:')
-schema = st.text_input('Enter your optional schema (leave blank if not needed):')
+
+# Initialize client with the input API key
+client = ScrapeGraphClient(api_key)
 
 # When the user clicks the 'Scrape' button
 if st.button('Scrape'):
-    # Set up the headers and payload for the API request
-    headers = {'Content-Type': 'application/json'}
-    payload = {
-        'api_key': api_key,
-        'url': url,
-        'prompt': prompt,
-        'schema': schema
-    }
-
-    # Make the API request
-    response = requests.post('https://api.scrapegraphai.com/smart_scraper', headers=headers, data=json.dumps(payload))
-
-    # If the request was successful
-    if response.status_code == 200:
-        # Parse the JSON response
-        data = response.json()
-
-        # Display the extracted data
-        st.write(data['result'])
-
-        # Display the remaining credits
-        st.write(f"Remaining credits: {data['credits_left']}")
-
-    # If the request was unsuccessful
-    else:
-        st.write(f"Error: {response.status_code}")
+    try:
+        result = smart_scraper(client, url, prompt)
+        st.write(result)
+    except Exception as e:
+        st.write(f"Error: {str(e)}")
 
 
 left_co2, *_, cent_co2, last_co2, last_c3 = st.columns([1] * 18)
