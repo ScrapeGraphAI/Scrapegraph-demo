@@ -8,12 +8,16 @@ from helper import (
     playwright_install,
     add_download_options
 )
-from scrapegraph_py import ScrapeGraphClient, smart_scraper
+from scrapegraph_py import SyncClient
+from scrapegraph_py.logger import get_logger
 
 st.set_page_config(page_title="Scrapegraph-ai demo", page_icon="🕷️")
 
 # Install playwright browsers
 playwright_install()
+
+# Initialize logger
+get_logger(level="DEBUG")
 
 def save_email(email):
     with open("mails.txt", "a") as file:
@@ -48,15 +52,20 @@ url = st.text_input('Enter the URL to scrape:')
 prompt = st.text_input('Enter your prompt:')
 
 # Initialize client with the input API key
-client = ScrapeGraphClient(api_key)
+client = SyncClient(api_key=api_key)
 
 # When the user clicks the 'Scrape' button
 if st.button('Scrape'):
     try:
-        result = smart_scraper(client, url, prompt)
-        st.write(result)
+        response = client.smartscraper(
+            website_url=url,
+            user_prompt=prompt
+        )
+        st.write(response['result'])
     except Exception as e:
         st.write(f"Error: {str(e)}")
+    finally:
+        client.close()
 
 
 left_co2, *_, cent_co2, last_co2, last_c3 = st.columns([1] * 18)
