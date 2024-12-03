@@ -46,26 +46,31 @@ left_co, cent_co, last_co = st.columns(3)
 with cent_co:
     st.image("assets/scrapegraphai_logo.png")
 
-# Use only text input for API key
-api_key = st.text_input('Enter your API key:')
+# Use password input for API key to mask it
+api_key = st.text_input('Enter your API key:', type="password", help="API key must start with 'sgai-'")
 url = st.text_input('Enter the URL to scrape:')
 prompt = st.text_input('Enter your prompt:')
 
-# Initialize client with the input API key
-client = SyncClient(api_key=api_key)
-
 # When the user clicks the 'Scrape' button
 if st.button('Scrape'):
-    try:
-        response = client.smartscraper(
-            website_url=url,
-            user_prompt=prompt
-        )
-        st.write(response['result'])
-    except Exception as e:
-        st.write(f"Error: {str(e)}")
-    finally:
-        client.close()
+    if not api_key.startswith('sgai-'):
+        st.error("Invalid API key format. API key must start with 'sgai-'")
+    elif not url:
+        st.error("Please enter a URL to scrape")
+    elif not prompt:
+        st.error("Please enter a prompt")
+    else:
+        try:
+            client = SyncClient(api_key=api_key)
+            response = client.smartscraper(
+                website_url=url,
+                user_prompt=prompt
+            )
+            st.write(response['result'])
+        except Exception as e:
+            st.error(f"Error: {str(e)}")
+        finally:
+            client.close()
 
 
 left_co2, *_, cent_co2, last_co2, last_c3 = st.columns([1] * 18)
