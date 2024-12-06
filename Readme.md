@@ -30,6 +30,9 @@ Is it possible to run in local this project using python with the command on you
 ```bash
 streamlit run main.py
 ```
+## News 📰
+
+- ScrapegraphAI has now his APIs! Check it out [here](https://scrapegraphai.com)!
 
 ## 🤝 Contributing
 
