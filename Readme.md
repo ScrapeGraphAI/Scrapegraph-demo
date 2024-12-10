@@ -16,7 +16,7 @@ Link of the developed library for the hackathon Github repo:
 
 Official streamlit demo:
 
-[![My Skills](https://skillicons.dev/icons?i=react)](https://scrapegraph-ai-web-dashboard.streamlit.app)
+[![My Skills](https://skillicons.dev/icons?i=react)](https://scrapegraph-demo-demo.streamlit.app)
 
 ## Example of output with TruLens
 <p align="center">
