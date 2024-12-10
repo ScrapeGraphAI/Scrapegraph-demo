@@ -2,6 +2,6 @@ boto3==1.35.36
 langchain_core==0.3.21
 pandas==2.2.3
 Requests==2.32.3
-scrapegraph_py==1.4.3
+scrapegraph-py==1.9.0b2
 scrapegraphai==1.32.0
 streamlit==1.39.0

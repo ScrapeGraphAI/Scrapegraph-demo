@@ -8,8 +8,8 @@ from helper import (
     playwright_install,
     add_download_options
 )
-from scrapegraph_py import SyncClient
-from scrapegraph_py.logger import get_logger
+from scrapegraph_py import Client
+from scrapegraph_py.logger import sgai_logger
 
 st.set_page_config(page_title="Scrapegraph-ai demo", page_icon="🕷️")
 
@@ -17,7 +17,7 @@ st.set_page_config(page_title="Scrapegraph-ai demo", page_icon="🕷️")
 playwright_install()
 
 # Initialize logger
-get_logger(level="DEBUG")
+sgai_logger.set_logging(level="INFO")
 
 def save_email(email):
     with open("mails.txt", "a") as file:
@@ -47,6 +47,8 @@ with cent_co:
     st.image("assets/scrapegraphai_logo.png")
 
 # Use password input for API key to mask it
+st.write("### You can buy the API credits [here](https://scrapegraphai.com)")
+
 api_key = st.text_input('Enter your API key:', type="password", help="API key must start with 'sgai-'")
 url = st.text_input('Enter the URL to scrape:')
 prompt = st.text_input('Enter your prompt:')
@@ -61,16 +63,17 @@ if st.button('Scrape'):
         st.error("Please enter a prompt")
     else:
         try:
-            client = SyncClient(api_key=api_key)
-            response = client.smartscraper(
+            sgai_client = Client(api_key=api_key)
+            response = sgai_client.smartscraper(
                 website_url=url,
                 user_prompt=prompt
             )
-            st.write(response['result'])
+            st.write(f"Request ID: {response['request_id']}")
+            st.write(f"Result: {response['result']}")
         except Exception as e:
             st.error(f"Error: {str(e)}")
         finally:
-            client.close()
+            sgai_client.close()
 
 
 left_co2, *_, cent_co2, last_co2, last_c3 = st.columns([1] * 18)
