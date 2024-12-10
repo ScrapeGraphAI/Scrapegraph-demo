@@ -41,7 +41,7 @@ left_co, cent_co, last_co = st.columns(3)
 with cent_co:
     st.image("assets/scrapegraphai_logo.png")
 st.title('Scrapegraph-api')
-st.write("refill at this page")
+st.write("### Refill at this page [Github page](https://scrapegraphai.com)")
 
 # Get the API key, URL, prompt, and optional schema from the user
 api_key = st.text_input('Enter your API key:')
@@ -51,32 +51,45 @@ schema = st.text_input('Enter your optional schema (leave blank if not needed):'
 
 # When the user clicks the 'Scrape' button
 if st.button('Scrape'):
-    # Set up the headers and payload for the API request
-    headers = {'Content-Type': 'application/json'}
-    payload = {
-        'api_key': api_key,
-        'url': url,
-        'prompt': prompt,
-        'schema': schema
-    }
-
-    # Make the API request
-    response = requests.post('https://api.scrapegraphai.com/smart_scraper', headers=headers, data=json.dumps(payload))
-
-    # If the request was successful
-    if response.status_code == 200:
-        # Parse the JSON response
-        data = response.json()
-
-        # Display the extracted data
-        st.write(data['result'])
-
-        # Display the remaining credits
-        st.write(f"Remaining credits: {data['credits_left']}")
-
-    # If the request was unsuccessful
+    if not api_key.startswith('sgai-'):
+        st.error("Invalid API key format. API key must start with 'sgai-'")
+    elif not url:
+        st.error("Please enter a URL to scrape")
+    elif not prompt:
+        st.error("Please enter a prompt")
     else:
-        st.write(f"Error: {response.status_code}")
+        # Set up the headers and payload for the API request
+        headers = {
+            'accept': 'application/json',
+            'SGAI-APIKEY': api_key,
+            'Content-Type': 'application/json'
+        }
+        
+        payload = {
+            'website_url': url,
+            'user_prompt': prompt,
+            'type': 'object'
+        }
+        
+        # Add schema to payload if provided
+        if schema:
+            payload['schema'] = schema
+
+        try:
+            response = requests.post(
+                'https://api.scrapegraphai.com/v1/smartscraper',
+                headers=headers,
+                json=payload
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                st.write("Result:", data)
+            else:
+                st.error(f"Error: {response.status_code} - {response.text}")
+                
+        except Exception as e:
+            st.error(f"Error: {str(e)}")
 
 
 left_co2, *_, cent_co2, last_co2, last_c3 = st.columns([1] * 18)

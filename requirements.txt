@@ -1,3 +1,6 @@
-pandas>=2.2.2
-scrapegraphai==1.12.0
-streamlit>=1.0
+boto3==1.35.36
+langchain_core==0.3.23
+pandas==2.2.3
+Requests==2.32.3
+scrapegraphai==1.33.2
+streamlit==1.39.0
