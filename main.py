@@ -44,7 +44,7 @@ st.title('Scrapegraph-api')
 st.write("### Refill at this page [Github page](https://scrapegraphai.com)")
 
 # Get the API key, URL, prompt, and optional schema from the user
-api_key = st.text_input('Enter your API key:')
+api_key = st.text_input('Enter your API key:', type="password")
 url = st.text_input('Enter the URL to scrape:')
 prompt = st.text_input('Enter your prompt:')
 schema = st.text_input('Enter your optional schema (leave blank if not needed):')
