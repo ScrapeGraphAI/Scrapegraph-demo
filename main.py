@@ -1,3 +1,18 @@
+import sys
+import asyncio
+
+if sys.platform.startswith("win"):
+    # On Windows, use the Proactor event loop, which supports subprocesses.
+    asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+else:
+    # Optionally, you can use uvloop for better performance on Linux/macOS.
+    try:
+        import uvloop
+        asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+    except ImportError:
+        # uvloop isn't installed; continue with the default event loop.
+        pass
+
 import os
 import base64
 import streamlit as st
