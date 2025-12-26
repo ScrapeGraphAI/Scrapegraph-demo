@@ -10,8 +10,7 @@ Just say which information you want to extract and the library will do it for yo
 ## 🔗 ScrapeGraph API & SDKs
 If you are looking for a quick solution to integrate ScrapeGraph in your system, check out our powerful API [here!](https://dashboard.scrapegraphai.com/login)
 
-[![API Banner](https://raw.githubusercontent.com/ScrapeGraphAI/Scrapegraph-ai/main/docs/assets/api_banner.png)](https://dashboard.scrapegraphai.com/login)
-
+[![API Banner](https://raw.githubusercontent.com/ScrapeGraphAI/Scrapegraph-ai/main/docs/assets/api_banner.png)](https://scrapegraphai.com/?utm_source=github&utm_medium=readme&utm_campaign=api_banner&utm_content=api_banner_image)
 We offer SDKs in both Python and Node.js, making it easy to integrate into your projects. Check them out below:
 
 | SDK       | Language | GitHub Link                                                                 |
