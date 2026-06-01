@@ -15,11 +15,19 @@ We offer SDKs in both Python and Node.js, making it easy to integrate into your 
 
 | SDK       | Language | GitHub Link                                                                 |
 |-----------|----------|-----------------------------------------------------------------------------|
-| Python SDK | Python   | [scrapegraph-py](https://github.com/ScrapeGraphAI/scrapegraph-sdk/tree/main/scrapegraph-py) |
-| Node.js SDK | Node.js  | [scrapegraph-js](https://github.com/ScrapeGraphAI/scrapegraph-sdk/tree/main/scrapegraph-js) |
+| Python SDK | Python   | [scrapegraph-py](https://github.com/ScrapeGraphAI/scrapegraph-py) |
+| Node.js SDK | Node.js  | [scrapegraph-js](https://github.com/ScrapeGraphAI/scrapegraph-js) |
 
-## Official Demo for Scrapegraph-ai Library 
-This repo is a streamlit demo/trial for the offcial Github Library Scrapegraph-ai.
+## Official Demo for the ScrapeGraphAI Python SDK
+This repo is a Streamlit demo for the official [`scrapegraph-py`](https://github.com/ScrapeGraphAI/scrapegraph-py) SDK.
+The main page (`main.py`) calls the [ScrapeGraphAI API](https://scrapegraphai.com) through the SDK and showcases three services:
+
+- **Extract** — AI-structured data from a URL via a natural-language prompt (with an optional JSON schema)
+- **Scrape** — clean `markdown`, `html`, `links`, `images` or `summary` for a page
+- **Search** — search the web and optionally extract structured data from the results
+
+Grab an API key from the [dashboard](https://dashboard.scrapegraphai.com), paste it into the app, and run.
+See [`scrapegraph_py_example.py`](scrapegraph_py_example.py) for a minimal standalone SDK script.
 
 Link of the developed library for the hackathon Github repo:
 
