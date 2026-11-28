@@ -14,6 +14,7 @@ else:
         pass
 
 import streamlit as st
+from helper import add_download_options
 from task import task
 from text_to_speech import text_to_speech
 
